@@ -8,6 +8,7 @@ import testRoutes from './routes/test.route.js';
 import authRoutes from './routes/auth.route.js';
 import userRoutes from './routes/user.route.js';
 import mediaRoutes from './routes/media.routes.js';
+import errorRoutes from './routes/error.route.js';
 
 const app = express();
 
@@ -15,7 +16,7 @@ const app = express();
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors({
-    origin: '*',
+    origin: process.env.FRONTEND_URL,
     credentials: true,
 }));
 
@@ -26,6 +27,7 @@ setupSwagger(app);
 app.use('/api/test', testRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/user', userRoutes);
+app.use('/api/error', errorRoutes);
 
 app.use('/media', mediaRoutes);
 
