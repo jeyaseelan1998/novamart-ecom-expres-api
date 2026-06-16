@@ -27,7 +27,7 @@ app.use('/api/test', testRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/user', userRoutes);
 
-app.use('/api/media', mediaRoutes);
+app.use('/media', mediaRoutes);
 
 async function startServer() {
     try {

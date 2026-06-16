@@ -2,17 +2,20 @@ import express from 'express';
 
 import upload from '../middleware/media.middleware.js';
 import {
-    uploadImage,
-    deleteImage,
-    getAllImages
+    uploadMedia,
+    deleteMedia,
+    getAllMedia,
+    getSingleMedia
 } from '../controller/media.controller.js';
 
 const mediaRouter = express.Router();
 
-mediaRouter.get('/', getAllImages);
+mediaRouter.get('/', getAllMedia);
 
-mediaRouter.post('/upload', upload.single('image'), uploadImage);
+mediaRouter.get('/:id', getSingleMedia);
 
-mediaRouter.delete('/delete', deleteImage);
+mediaRouter.post('/upload', upload.single('file'), uploadMedia);
+
+mediaRouter.delete('/delete/:id', deleteMedia);
 
 export default mediaRouter;
