@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import {
   login,
+  logout,
   register,
 } from '../controller/auth.controller.js';
 
@@ -62,5 +63,7 @@ authRouter.post('/register', register);
  *         description: Login successful
  */
 authRouter.post('/login', login);
+
+authRouter.post('/logout', logout);
 
 export default authRouter;
