@@ -2,10 +2,7 @@ import cors from 'cors';
 import express from 'express';
 import cookieParser from 'cookie-parser';
 
-import { 
-    // FRONTEND_URL, 
-    PORT 
-} from './config/env.js';
+import { FRONTEND_URL, PORT } from './config/env.js';
 import { setupSwagger } from './config/swagger.js';
 import connectDB from "./config/db.js";
 import testRoutes from './routes/test.route.js';
@@ -20,7 +17,7 @@ const app = express();
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors({
-    // origin: FRONTEND_URL,
+    origin: FRONTEND_URL,
     credentials: true,
 }));
 
