@@ -1,7 +1,7 @@
 import { config } from "dotenv";
 
 config({
-    path: '.env',
+    path: `${process.cwd()}/.env`,
     debug: process.env.MODE === 'dev',
 })
 
