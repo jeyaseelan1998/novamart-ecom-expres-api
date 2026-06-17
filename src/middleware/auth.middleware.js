@@ -1,4 +1,6 @@
 import jwt from 'jsonwebtoken';
+
+import { JWT_SECRET } from '../config/env.js';
 import User from '../modal/user.model.js';
 
 export const protect = async (req, res, next) => {
@@ -13,7 +15,7 @@ export const protect = async (req, res, next) => {
 
         const decoded = jwt.verify(
             token,
-            process.env.JWT_SECRET
+            JWT_SECRET
         );
 
         req.user = await User.findById(decoded.userId)

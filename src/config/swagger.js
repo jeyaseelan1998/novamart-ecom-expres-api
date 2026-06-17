@@ -1,5 +1,6 @@
 import swaggerJsdoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
+import { API_URL } from './env.js';
 
 const options = {
     definition: {
@@ -11,7 +12,7 @@ const options = {
         },
         servers: [
             {
-                url: process.env.API_URL,
+                url: API_URL,
             },
         ],
         components: {

@@ -1,10 +1,11 @@
 import { connect } from "mongoose";
+import { MONGODB_DB, MONGODB_URI } from "./env.js";
 
 
 export default async function connectDB() {
     try {
-        await connect(process.env.MONGODB_URI, {
-            dbName: process.env.MONGODB_DB
+        await connect(MONGODB_URI, {
+            dbName: MONGODB_DB
         });
         console.log(">> DATABASE connected successfully");
     } catch (error) {

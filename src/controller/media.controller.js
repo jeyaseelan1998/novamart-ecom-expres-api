@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 import { randomUUID } from 'crypto';
 import { PutObjectCommand, DeleteObjectCommand } from '@aws-sdk/client-s3';
 
+import { AWS_S3_BUCKET } from '../config/env.js';
 import { getMediaUrl } from '../helpers/media.js';
 import s3Client from '../config/s3.js';
 import Media from '../modal/media.model.js';
@@ -23,7 +24,7 @@ export const uploadMedia = async (req, res) => {
 
         await s3Client.send(
             new PutObjectCommand({
-                Bucket: process.env.AWS_S3_BUCKET,
+                Bucket: AWS_S3_BUCKET,
                 Key: key,
                 Body: file.buffer,
                 ContentType: file.mimetype,
@@ -40,7 +41,7 @@ export const uploadMedia = async (req, res) => {
             mimeType: file.mimetype,
             extension: path.extname(file.originalname),
             size: file.size,
-            bucket: process.env.AWS_S3_BUCKET,
+            bucket: AWS_S3_BUCKET,
             uploadedBy: req.user?._id || null,
         });
 
@@ -80,7 +81,7 @@ export const deleteMedia = async (req, res) => {
 
         await s3Client.send(
             new DeleteObjectCommand({
-                Bucket: process.env.AWS_S3_BUCKET,
+                Bucket: AWS_S3_BUCKET,
                 Key: media.s3Key,
             })
         );

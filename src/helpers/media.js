@@ -1,11 +1,12 @@
 import { GetObjectCommand } from '@aws-sdk/client-s3';
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
 
+import { AWS_S3_BUCKET } from '../config/env.js';
 import s3Client from '../config/s3.js';
 
 export const getMediaUrl = async (key) => {
     const command = new GetObjectCommand({
-        Bucket: process.env.AWS_S3_BUCKET,
+        Bucket: AWS_S3_BUCKET,
         Key: key,
     });
 

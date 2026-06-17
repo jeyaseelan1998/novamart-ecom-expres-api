@@ -2,6 +2,7 @@ import cors from 'cors';
 import express from 'express';
 import cookieParser from 'cookie-parser';
 
+import { FRONTEND_URL, PORT } from './config/env.js';
 import { setupSwagger } from './config/swagger.js';
 import connectDB from "./config/db.js";
 import testRoutes from './routes/test.route.js';
@@ -16,7 +17,7 @@ const app = express();
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors({
-    origin: process.env.FRONTEND_URL,
+    origin: FRONTEND_URL,
     credentials: true,
 }));
 
@@ -34,7 +35,7 @@ app.use('/media', mediaRoutes);
 async function startServer() {
     try {
         await connectDB();
-        app.listen(process.env.PORT, () => console.log(`>> Server is running at http://localhost:${process.env.PORT}`));
+        app.listen(PORT, () => console.log(`>> Server is running at http://localhost:${PORT}`));
     } catch (error) {
         console.log(`\n[ERROR] >>`, error.message, '\n');
         process.exit(1);
