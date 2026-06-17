@@ -10,6 +10,16 @@ import authRoutes from './routes/auth.route.js';
 import userRoutes from './routes/user.route.js';
 import mediaRoutes from './routes/media.routes.js';
 import errorRoutes from './routes/error.route.js';
+import { config } from "dotenv";
+
+config({
+    path: `${process.cwd()}/.env`,
+    debug: process.env.MODE === 'dev',
+})
+
+console.log('\n\n');
+console.log(process.env.MONGODB_URI, '\n\n');
+console.log(process.env);
 
 const app = express();
 
