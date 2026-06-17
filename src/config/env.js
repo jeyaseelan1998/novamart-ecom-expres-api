@@ -8,7 +8,7 @@ config({
 export const MONGODB_URI = process.env.RAILWAY_MONGODB_URI;
 export const MONGODB_DB = process.env.RAILWAY_MONGODB_DB;
 export const JWT_SECRET = process.env.RAILWAY_JWT_SECRET;
-export const PORT = process.env.RAILWAY_PORT;
+export const PORT = process.env.RAILWAY_PORT || 9000;
 export const API_URL = process.env.RAILWAY_API_URL;
 export const FRONTEND_URL = process.env.RAILWAY_FRONTEND_URL;
 export const AWS_REGION = process.env.RAILWAY_AWS_REGION;
