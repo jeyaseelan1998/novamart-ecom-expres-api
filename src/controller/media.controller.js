@@ -1,5 +1,6 @@
 import path from 'path';
 import mongoose from 'mongoose';
+import sizeOf from 'image-size';
 import { randomUUID } from 'crypto';
 import { PutObjectCommand, DeleteObjectCommand } from '@aws-sdk/client-s3';
 
@@ -22,6 +23,20 @@ export const uploadMedia = async (req, res) => {
         const fileName = `${randomUUID()}-${file.originalname}`;
         const key = `uploads/${fileName}`;
 
+        let width = null;
+        let height = null;
+
+        if (file.mimetype.startsWith('image/')) {
+            try {
+                const dimensions = sizeOf(file.buffer);
+
+                width = dimensions.width || null;
+                height = dimensions.height || null;
+            } catch (err) {
+                console.error('Failed to read image dimensions:', err);
+            }
+        }
+
         await s3Client.send(
             new PutObjectCommand({
                 Bucket: AWS_S3_BUCKET,
@@ -41,6 +56,8 @@ export const uploadMedia = async (req, res) => {
             mimeType: file.mimetype,
             extension: path.extname(file.originalname),
             size: file.size,
+            width,
+            height,
             bucket: AWS_S3_BUCKET,
             uploadedBy: req.user?._id || null,
         });

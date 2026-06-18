@@ -30,6 +30,14 @@ const mediaSchema = new mongoose.Schema(
             type: Number,
             required: true,
         },
+        width: {
+            type: Number,
+            default: null,
+        },
+        height: {
+            type: Number,
+            default: null,
+        },
         bucket: {
             type: String,
             required: true,
