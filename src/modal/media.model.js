@@ -42,6 +42,11 @@ const mediaSchema = new mongoose.Schema(
             type: String,
             required: true,
         },
+        altText: {
+            type: String,
+            default: '',
+            trim: true,
+        },
         uploadedBy: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'User',

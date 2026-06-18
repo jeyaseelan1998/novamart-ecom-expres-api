@@ -5,7 +5,8 @@ import {
     uploadMedia,
     deleteMedia,
     getAllMedia,
-    getSingleMedia
+    getSingleMedia,
+    updateMedia
 } from '../controller/media.controller.js';
 
 const mediaRouter = express.Router();
@@ -13,6 +14,8 @@ const mediaRouter = express.Router();
 mediaRouter.get('/', getAllMedia);
 
 mediaRouter.get('/:id', getSingleMedia);
+
+mediaRouter.patch('/:id', updateMedia);
 
 mediaRouter.post('/upload', upload.single('file'), uploadMedia);
 

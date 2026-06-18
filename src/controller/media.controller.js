@@ -199,3 +199,47 @@ export const getSingleMedia = async (req, res) => {
         });
     }
 };
+
+export const updateMedia = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { altText } = req.body;
+
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            return res.status(400).json({
+                success: false,
+                message: 'Invalid media ID',
+            });
+        }
+
+        const media = await Media.findByIdAndUpdate(
+            id,
+            {
+                ...(altText !== undefined && { altText }),
+            },
+            {
+                new: true,
+                runValidators: true,
+            }
+        ).lean();
+
+        if (!media) {
+            return res.status(404).json({
+                success: false,
+                message: 'Media not found',
+            });
+        }
+
+        return res.status(200).json({
+            success: true,
+            data: media,
+        });
+    } catch (error) {
+        console.error('Update Media Error:', error);
+
+        return res.status(500).json({
+            success: false,
+            message: error.message,
+        });
+    }
+};
