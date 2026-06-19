@@ -15,10 +15,10 @@ const mediaSchema = new mongoose.Schema(
             required: true,
             unique: true,
         },
-        // url: {
-        //     type: String,
-        //     required: true,
-        // },
+        url: {
+            type: String,
+            required: true,
+        },
         mimeType: {
             type: String,
             required: true,

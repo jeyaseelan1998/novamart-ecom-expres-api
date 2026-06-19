@@ -15,6 +15,6 @@ export const getMediaUrl = async (key, url = true) => {
     }
 
     return getSignedUrl(s3Client, command, {
-        expiresIn: 3600, // 1 hour
+        // expiresIn: 3600, // 1 hour
     });
 };

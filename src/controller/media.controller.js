@@ -46,13 +46,13 @@ export const uploadMedia = async (req, res) => {
             })
         );
 
-        // const url = await getS3MediaUrl(key);
+        const url = await getS3MediaUrl(key);
 
         const media = await Media.create({
             originalName: file.originalname,
             fileName,
             s3Key: key,
-            // url,
+            url,
             mimeType: file.mimetype,
             extension: path.extname(file.originalname),
             size: file.size,
