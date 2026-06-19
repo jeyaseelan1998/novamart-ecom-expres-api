@@ -5,7 +5,7 @@ import { randomUUID } from 'crypto';
 import { PutObjectCommand, DeleteObjectCommand } from '@aws-sdk/client-s3';
 
 import { AWS_S3_BUCKET } from '../config/env.js';
-import { getMediaUrl } from '../helpers/media.js';
+import { getMediaUrl as getS3MediaUrl } from '../helpers/media.js';
 import s3Client from '../config/s3.js';
 import Media from '../modal/media.model.js';
 
@@ -46,13 +46,13 @@ export const uploadMedia = async (req, res) => {
             })
         );
 
-        const url = await getMediaUrl(key);
+        // const url = await getS3MediaUrl(key);
 
         const media = await Media.create({
             originalName: file.originalname,
             fileName,
             s3Key: key,
-            url,
+            // url,
             mimeType: file.mimetype,
             extension: path.extname(file.originalname),
             size: file.size,
@@ -241,5 +241,36 @@ export const updateMedia = async (req, res) => {
             success: false,
             message: error.message,
         });
+    }
+};
+
+export const getMediaFile = async (req, res) => {
+    try {
+        const { s3Key } = req.params;
+
+        if (!s3Key) {
+            return res.status(404).json({
+                success: false,
+                message: 'Media not found',
+            });
+        }
+
+        const response = await getS3MediaUrl(`uploads/${s3Key}`, false); 
+
+        res.setHeader(
+            'Content-Type',
+            response.ContentType || 'application/octet-stream'
+        );
+
+        res.setHeader(
+            'Content-Length',
+            response.ContentLength
+        );
+
+        return response.Body.pipe(res);
+    } catch (error) {
+        console.error('Get Media URL Error:', error);
+
+        return res.status(500).send('');
     }
 };

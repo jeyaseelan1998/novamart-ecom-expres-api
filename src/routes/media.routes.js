@@ -6,7 +6,8 @@ import {
     deleteMedia,
     getAllMedia,
     getSingleMedia,
-    updateMedia
+    updateMedia,
+    getMediaFile
 } from '../controller/media.controller.js';
 
 const mediaRouter = express.Router();
@@ -14,6 +15,8 @@ const mediaRouter = express.Router();
 mediaRouter.get('/', getAllMedia);
 
 mediaRouter.get('/:id', getSingleMedia);
+
+mediaRouter.get('/uploads/:s3Key', getMediaFile);
 
 mediaRouter.patch('/:id', updateMedia);
 
