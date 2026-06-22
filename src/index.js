@@ -10,6 +10,7 @@ import authRoutes from './routes/auth.route.js';
 import userRoutes from './routes/user.route.js';
 import mediaRoutes from './routes/media.routes.js';
 import errorRoutes from './routes/error.route.js';
+import productRouter from './routes/product.route.js';
 
 const app = express();
 
@@ -30,6 +31,8 @@ app.use('/api/test', testRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/user', userRoutes);
 app.use('/api/error', errorRoutes);
+
+app.use('/api/products', productRouter);
 
 app.use('/media', mediaRoutes);
 
