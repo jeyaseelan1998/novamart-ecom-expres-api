@@ -5,6 +5,48 @@ const productRouter = express.Router();
 
 /**
  * @swagger
+ * components:
+ *   schemas:
+ *     Product:
+ *       type: object
+ *       properties:
+ *         _id:
+ *           type: string
+ *           example: 685a6d8d2b8f9c1234567890
+ *         title:
+ *           type: string
+ *           example: T-SHIRT WITH TAPE DETAILS
+ *         slug:
+ *           type: string
+ *           example: t-shirt-with-tape-details
+ *         category:
+ *           type: string
+ *           example: Casual
+ *         image:
+ *           type: string
+ *           example: 6a36255aa88297ff8653ca50
+ *         rating:
+ *           type: number
+ *           example: 4.3
+ *         discount:
+ *           type: number
+ *           example: 10
+ *         price:
+ *           type: number
+ *           example: 120
+ *         deleted:
+ *           type: boolean
+ *           example: false
+ *         createdAt:
+ *           type: string
+ *           format: date-time
+ *         updatedAt:
+ *           type: string
+ *           format: date-time
+ */
+
+/**
+ * @swagger
  * /api/products:
  *   get:
  *     summary: Get all products
@@ -125,10 +167,14 @@ productRouter.get("/:id", getProductById);
  *           schema:
  *             type: object
  *             required:
+ *               - category
  *               - title
  *               - image
  *               - price
  *             properties:
+ *               category:
+ *                 type: string
+ *                 example: Casual
  *               title:
  *                 type: string
  *                 example: T-SHIRT WITH TAPE DETAILS

@@ -13,6 +13,11 @@ const productSchema = new mongoose.Schema(
             lowercase: true,
             trim: true,
         },
+        category: {
+            type: String,
+            trim: true,
+            required: true,
+        },
         image: {
             type: mongoose.Schema.Types.ObjectId,
             ref: "Media",
