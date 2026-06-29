@@ -8,6 +8,10 @@ const newsletterSchema = new mongoose.Schema(
             lowercase: true,
             trim: true,
         },
+        marketing_consent: {
+            type: Boolean,
+            required: true,
+        },
     },
     {
         timestamps: true,
