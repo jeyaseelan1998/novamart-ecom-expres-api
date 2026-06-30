@@ -20,9 +20,10 @@ export async function sendEmail({
     try {
         const data = await mg.messages.create(process.env.MAILGUN_DOMAIN, {
             from: `Mailgun Sandbox <postmaster@${process.env.MAILGUN_DOMAIN}>`,
-            to: ["<jeya.seelan1998@gmail.com>"],
+            to: ["Jeyaseelan R <jeya.seelan1998@gmail.com>"],
             subject,
             text,
+            "v:emailLogId": emailTrackID.toString(),
         });
         await trackEmailState({ id: emailTrackID, state: EMAIL_QUEUED, mailgun_log_id: data?.id });
         console.log(data); // logs response data

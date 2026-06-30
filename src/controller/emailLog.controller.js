@@ -1,20 +1,23 @@
-import { trackEmailState } from '../helpers/email.js';
+import { EMAIL_SUCCESS, trackEmailState } from '../helpers/email.js';
 
 export const updateEmailState = async (req, res) => {
     try {
-        const { id, state } = req.body;
+        const event = req.body["event-data"];
+
+        const emailLogId = event["user-variables"]?.emailLogId;
 
         console.log("===========");
-        console.log(req.body);
-
-        if (!id || !state) {
+        console.log(event);
+        console.log(event?.message?.headers);
+       
+        if (!emailLogId) {
             return res.status(200).json({
                 success: false,
                 message: "Email id and state are required.",
             });
         }
 
-        const emailId = await trackEmailState({ id, state });
+        const emailId = await trackEmailState({ id: emailLogId, state: EMAIL_SUCCESS });
 
         if (!emailId) {
             return res.status(200).json({
