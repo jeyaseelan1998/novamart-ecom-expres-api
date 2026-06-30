@@ -5,13 +5,14 @@ import cookieParser from 'cookie-parser';
 import { FRONTEND_URL, PORT } from './config/env.js';
 import { setupSwagger } from './config/swagger.js';
 import connectDB from "./config/db.js";
-import testRoutes from './routes/test.route.js';
-import authRoutes from './routes/auth.route.js';
-import userRoutes from './routes/user.route.js';
-import mediaRoutes from './routes/media.routes.js';
-import errorRoutes from './routes/error.route.js';
+import testRouter from './routes/test.route.js';
+import authRouter from './routes/auth.route.js';
+import userRouter from './routes/user.route.js';
+import mediaRouter from './routes/media.routes.js';
+import errorRouter from './routes/error.route.js';
 import productRouter from './routes/product.route.js';
 import newsletterRouter from "./routes/newsletter.route.js";
+import webhookRouter from "./routes/webhook.route.js";
 
 const app = express();
 
@@ -28,15 +29,16 @@ app.use(cors({
 setupSwagger(app);
 
 // Frontend routes
-app.use('/api/test', testRoutes);
-app.use('/api/auth', authRoutes);
-app.use('/api/user', userRoutes);
-app.use('/api/error', errorRoutes);
+app.use('/api/test', testRouter);
+app.use('/api/auth', authRouter);
+app.use('/api/user', userRouter);
+app.use('/api/error', errorRouter);
 
 app.use('/api/products', productRouter);
 app.use('/api/newsletter', newsletterRouter);
+app.use('/api/webhook', webhookRouter);
 
-app.use('/media', mediaRoutes);
+app.use('/media', mediaRouter);
 
 async function startServer() {
     try {

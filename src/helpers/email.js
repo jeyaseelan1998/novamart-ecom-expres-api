@@ -5,11 +5,11 @@ export const EMAIL_QUEUED = 1;
 export const EMAIL_SUCCESS = 2;
 export const EMAIL_FAILED = 3;
 
-export const trackEmailState = async ({ to, subject, text, state, id }) => {
+export const trackEmailState = async ({ to, subject, text, state, id, mailgun_log_id }) => {
     if (id) {
         const email = await EmailLog.findByIdAndUpdate(
             id,
-            { state },
+            { state, mailgun_log_id },
             { returnDocument: "after" }
         );
 

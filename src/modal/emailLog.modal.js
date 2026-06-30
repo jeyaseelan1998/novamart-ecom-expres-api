@@ -27,6 +27,10 @@ const emailLogSchema = new mongoose.Schema(
             type: Number,
             default: 0,
         },
+        mailgun_log_id: {
+            type: String,
+            default: '',
+        },
     },
     {
         timestamps: true,

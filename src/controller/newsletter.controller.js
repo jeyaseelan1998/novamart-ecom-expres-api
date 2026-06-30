@@ -1,4 +1,4 @@
-// import { sendEmail } from "../config/mailgun.js";
+import { sendEmail } from "../config/mailgun.js";
 import Newsletter from "../modal/newsletter.modal.js";
 
 export const createNewsletter = async (req, res) => {
@@ -15,11 +15,11 @@ export const createNewsletter = async (req, res) => {
 
         const contact = await Newsletter.create({ email, marketing_consent });
 
-        // await sendEmail({
-        //     email,
-        //     text: "Congratulations Jeyaseelan R, you just sent an email with Mailgun! You are truly awesome!",
-        //     subject: "News letter from Novamart 2026",
-        // })
+        await sendEmail({
+            email,
+            text: "Congratulations Jeyaseelan R, you just sent an email with Mailgun! You are truly awesome!",
+            subject: "News letter from Novamart 2026",
+        })
 
         return res.status(201).json({
             success: true,
